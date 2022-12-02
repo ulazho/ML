@@ -6,6 +6,7 @@
     "configurations": [
         
         {
+            "cwd": "${fileDirname}",
             "name": "Python: текущий файл",
             "type": "python",
             "request": "launch",
