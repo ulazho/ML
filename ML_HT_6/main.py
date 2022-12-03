@@ -12,15 +12,15 @@ data_y = pd.DataFrame(data['y'])
 
 
 data_x = pd.DataFrame(data['x'])
+data_x = data_x.sort_values
 model_x_1 = LinearRegression()
 model_x_1.fit(data_x, data_y.values.ravel())
+
 
 plt.plot(data_x, model_x_1.predict(data_x), "ro")
 plt.show()
 
 
-plt.plot(data_x, data_y, "bo")
-plt.show()
 
 poly_2 = PolynomialFeatures(2)
 data_x_2 = poly_2.fit_transform(data_x)
