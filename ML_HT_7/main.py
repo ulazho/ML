@@ -37,8 +37,6 @@ data_test_x = pd.DataFrame(data_test[features])
 data_test_y = pd.DataFrame(data_test['ViolentCrimesPerPop'])
 
 model = LinearRegression()
-
-
 model.fit(data_train_x, data_train_y.values.ravel())
 
 
@@ -48,10 +46,13 @@ data_test_y_predicted = model.predict(data_test_x)
 print(f"MSE without regularization {mean_squared_error(data_test_y, data_test_y_predicted)}")
 
 
+min = 2
+for x in np.arange(1, 7):
 
-clf = Ridge(alpha=1)
-clf.fit(data_train_x, data_train_y.values.ravel())
-clf_predicted = clf.predict(data_test_x)
-print(f"MSE with regularization {mean_squared_error(data_test_y, clf_predicted)}")
-
-        
+    clf = Ridge(alpha=x)
+    clf.fit(data_train_x, data_train_y.values.ravel())
+    clf_predicted = clf.predict(data_test_x)
+    if(min > mean_squared_error(data_test_y, clf_predicted)):
+        min = mean_squared_error(data_test_y, clf_predicted)
+        min_count = x
+print(f"MSE with regularization {min}")
